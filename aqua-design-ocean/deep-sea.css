@@ -1,0 +1,64 @@
+/* 深藍模式：日夜光境切到「深藍」時，整個網站沉入夜海。浮游生物由 ocean-fx.js 繪製。 */
+
+/* 註冊色彩變數，讓整頁配色可以平滑轉場 */
+@property --bg { syntax: '<color>'; inherits: true; initial-value: #f8f7f0; }
+@property --panel { syntax: '<color>'; inherits: true; initial-value: #eef3f0; }
+@property --ink { syntax: '<color>'; inherits: true; initial-value: #102e3c; }
+@property --muted { syntax: '<color>'; inherits: true; initial-value: #61767a; }
+@property --accent { syntax: '<color>'; inherits: true; initial-value: #237d78; }
+@property --line { syntax: '<color>'; inherits: true; initial-value: #d6dedb; }
+@property --deep { syntax: '<color>'; inherits: true; initial-value: #061c2a; }
+
+body { transition: --bg 1.2s ease, --panel 1.2s ease, --ink 1.2s ease, --muted 1.2s ease, --accent 1.2s ease, --line 1.2s ease, --deep 1.2s ease, background-color 1.2s ease, color 1.2s ease; }
+.about, .process, .ai-design, .contact, .coral-panel, .ai-form, .ai-presets span, .work-photo, .ai-form .field input, .ai-form .field select, .ai-form .field textarea { transition: background-color 1.2s ease, border-color 1.2s ease, color 1.2s ease; }
+.hero-art > img, .fx-water, .intro-photo img, .coral-media img { transition: opacity .5s, filter 1.2s ease; }
+.sunray { transition: filter 1.2s ease; }
+
+body.deep-sea {
+  --bg: #03111a;
+  --panel: #061a26;
+  --deep: #020b12;
+  --ink: #dbe9e6;
+  --muted: #8ea8ad;
+  --accent: #72e4d7;
+  --line: #7fb3bd2e;
+  color-scheme: dark;
+}
+/* 彈窗維持白底，色彩變數也鎖回日光值 */
+body.deep-sea dialog:not(#brand-intro) { color-scheme: light; --bg: #f8f7f0; --panel: #eef3f0; --deep: #061c2a; --ink: #102e3c; --muted: #61767a; --accent: #237d78; --line: #d6dedb; }
+
+/* 原本寫死的淺色區塊 */
+.deep-sea .about, .deep-sea .ai-design { background: #051722; }
+.deep-sea .process { background: #041420; }
+.deep-sea .process-grid { border-top-color: var(--line); }
+.deep-sea .contact { background: #04161f; }
+.deep-sea .coral-panel { background: #071d2a; }
+.deep-sea .work-photo { background: #0a2230; }
+.deep-sea .filter.active { background: var(--accent); border-color: var(--accent); color: #03111a; }
+.deep-sea .outline:hover { background: #0e3a45; }
+
+/* AI 表單 */
+.deep-sea .ai-form { background: #061a26; border-color: var(--line); }
+.deep-sea .ai-form legend, .deep-sea .ai-form .field { color: var(--ink); }
+.deep-sea .ai-form .field input, .deep-sea .ai-form .field select, .deep-sea .ai-form .field textarea { color: var(--ink); background: #03111a; border-color: #7fb3bd40; }
+.deep-sea .ai-form .field input::placeholder, .deep-sea .ai-form .field textarea::placeholder { color: #6d878c; }
+.deep-sea .ai-presets span { background: #03111a; border-color: var(--line); }
+.deep-sea .ai-presets input:checked + span { background: #0f3b43; color: #c3f5ec; border-color: var(--accent); }
+.deep-sea .ai-form .primary { background: var(--accent); color: #03111a; }
+.deep-sea .ai-form .primary:hover { background: #a3f1e7; }
+.deep-sea .ai-canvas { border-color: #1b3d48; }
+.deep-sea .ai-result-actions a { border-color: var(--line); color: var(--ink); }
+.deep-sea .ai-result-actions a:hover { background: #0e3a45; }
+.deep-sea .ai-result-actions button { background: var(--accent); color: #03111a; }
+
+/* 影像降到夜間亮度；首頁陽光變成微弱的月光 */
+.deep-sea .hero-art > img, .deep-sea .fx-water { filter: brightness(.46) saturate(.72) hue-rotate(12deg); }
+.deep-sea .intro-photo img, .deep-sea .coral-media img { filter: brightness(.78) saturate(.85); }
+.deep-sea .sunray { filter: blur(16px) brightness(.35) hue-rotate(30deg); }
+
+@media (max-width: 760px) {
+  .deep-sea .hero-art > img, .deep-sea .fx-water { filter: brightness(.48) saturate(.72) hue-rotate(12deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body, .about, .process, .ai-design, .contact, .coral-panel, .ai-form, .work-photo { transition: none; }
+}

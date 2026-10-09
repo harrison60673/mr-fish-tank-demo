@@ -1,0 +1,60 @@
+/* The original logo stays intact; SVG masks separate its fish for animation. */
+#brand-intro{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;border:0;padding:0;background:#f7f8f3;color:#16251d;overflow:hidden;animation:none;isolation:isolate}
+#brand-intro::backdrop{background:#f7f8f3}
+#brand-intro[open]{display:flex;align-items:center;justify-content:center}
+body.intro-open{overflow:hidden}
+.intro-top{position:absolute;top:34px;left:5%;right:5%;display:flex;justify-content:space-between;align-items:center;font:10px/1.5 sans-serif;letter-spacing:2.5px;color:#637060;z-index:3}
+.intro-skip{font-size:11px;letter-spacing:1px;border:1px solid #243c2c33;border-radius:30px;padding:10px 18px;color:#324330}
+.intro-skip:hover{background:#e6ebde}.intro-skip:focus-visible,#intro-replay:focus-visible{outline:2px solid #536c44;outline-offset:5px}
+.intro-stage{width:min(740px,88vw);position:relative;text-align:center}
+.intro-art{width:100%;height:auto;display:block;overflow:visible;mix-blend-mode:multiply}
+.intro-fish{transform-box:view-box;transform-origin:505px 929px;opacity:0}
+.intro-logo-reveal{transform-origin:510px 925px;transform:scale(0)}
+.intro-logo-base{opacity:0}
+.intro-bubble{fill:none;stroke:#bd393c;stroke-width:2;opacity:0}
+.intro-wave{fill:none;stroke:#b3c4aa;stroke-width:1.4;opacity:0;transform-origin:510px 925px}
+.intro-name{margin-top:8px;font:400 clamp(27px,4.4vw,42px)/1.6 var(--serif);letter-spacing:.32em;padding-left:.32em;opacity:0;transform:translateY(16px)}
+.intro-tagline{font-size:11px;letter-spacing:3px;color:#72806b;margin-top:12px;opacity:0;transform:translateY(10px)}
+.intro-foot{position:absolute;bottom:35px;left:5%;right:5%;display:flex;align-items:center;gap:25px;font:9px sans-serif;letter-spacing:2px;color:#7c8875}
+.intro-timeline{height:1px;flex:1;background:#d7dece;overflow:hidden}.intro-timeline:after{content:'';display:block;height:100%;background:#637d51;transform:scaleX(0);transform-origin:left}
+.intro-orbit{position:absolute;width:min(72vw,840px);aspect-ratio:1;border:1px solid #84987516;border-radius:50%;pointer-events:none;z-index:-1}.intro-orbit:before,.intro-orbit:after{content:'';position:absolute;inset:12%;border:1px solid #84987512;border-radius:50%}.intro-orbit:after{inset:-12%}
+#brand-intro.playing .intro-fish{animation:fish-arrive 3.6s cubic-bezier(.3,.02,.25,1) both}
+#brand-intro.playing .intro-logo-base{animation:logo-visible .25s 2.75s forwards}
+#brand-intro.playing .intro-logo-reveal{animation:logo-grow 1.5s 2.75s cubic-bezier(.2,.6,.3,1) forwards}
+#brand-intro.playing .intro-wave{animation:logo-wave 1.6s 2.9s ease-out both}
+#brand-intro.playing .intro-wave.second{animation-delay:3.15s}
+#brand-intro.playing .intro-bubble{animation:bubble-rise 1.6s 1s ease-out both}
+#brand-intro.playing .intro-bubble.b2{animation-delay:1.35s}#brand-intro.playing .intro-bubble.b3{animation-delay:1.7s}
+#brand-intro.playing .intro-name{animation:brand-emerge .9s 3.75s forwards}
+#brand-intro.playing .intro-tagline{animation:brand-emerge .9s 4.05s forwards}
+#brand-intro.playing .intro-timeline:after{animation:intro-progress 6.4s linear forwards}
+#brand-intro.leaving{pointer-events:none;animation:intro-exit .7s cubic-bezier(.76,0,.24,1) both}
+#intro-replay{display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:5px 0;font-size:10px;letter-spacing:1px;color:var(--muted);pointer-events:auto}
+#intro-replay span{font-size:16px;color:var(--accent)}
+@keyframes fish-arrive{0%{opacity:0;transform:translate(1150px,-150px) rotate(-9deg) scale(.7)}8%{opacity:1}30%{transform:translate(700px,-220px) rotate(12deg) scale(.84)}52%{transform:translate(340px,-65px) rotate(-13deg) scale(.94)}72%{transform:translate(95px,-55px) rotate(8deg) scale(1)}87%{transform:translate(-15px,8px) rotate(-3deg)}100%{opacity:1;transform:translate(0,0) rotate(0) scale(1)}}
+@keyframes logo-visible{to{opacity:1}}@keyframes logo-grow{to{transform:scale(1)}}
+@keyframes logo-wave{0%{opacity:.6;transform:scale(.15)}100%{opacity:0;transform:scale(2.8)}}
+@keyframes bubble-rise{0%{opacity:0;transform:translate(120px,50px)}30%{opacity:.55}100%{opacity:0;transform:translate(20px,-190px)}}
+@keyframes brand-emerge{to{opacity:1;transform:translateY(0)}}@keyframes intro-progress{to{transform:scaleX(1)}}
+@keyframes intro-exit{to{transform:translateY(-102%);visibility:hidden}}
+@media(max-width:760px){.intro-top{top:23px;font-size:8px;letter-spacing:1.8px}.intro-skip{padding:9px 13px;font-size:10px}.intro-stage{width:94vw}.intro-name{margin-top:18px;font-size:29px}.intro-tagline{font-size:10px;letter-spacing:2px}.intro-foot{bottom:25px;font-size:7px;gap:14px}.intro-orbit{width:90vw}#intro-replay{margin-top:15px}.hero-content{padding-bottom:140px}.hero{min-height:730px}}
+@media(prefers-reduced-motion:reduce){#brand-intro .intro-fish,#brand-intro .intro-logo-base,#brand-intro .intro-name,#brand-intro .intro-tagline{opacity:1;transform:none}#brand-intro .intro-logo-reveal{transform:scale(1)}#brand-intro .intro-bubble,#brand-intro .intro-wave{display:none}#brand-intro.leaving{visibility:hidden}}
+
+.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px 22px;pointer-events:auto;position:relative;z-index:4}.hero-actions #intro-replay{margin:0;padding:12px 0;min-height:44px}
+
+/* A minimal red line-art koi swims first, then resolves into the supplied logo fish. */
+.intro-koi{transform-origin:505px 929px;transform:scale(1.35)}
+.intro-fish-mark{opacity:0}
+.koi-tail{transform-origin:559px 928px}
+.koi-pectoral{transform-origin:421px 936px}
+#brand-intro.playing .intro-koi{animation:koi-to-mark .75s 2.45s ease-in-out both}
+#brand-intro.playing .intro-fish-mark{animation:mark-appear .65s 2.55s ease-in-out both}
+#brand-intro.playing .koi-tail{animation:koi-tail-beat .44s ease-in-out infinite alternate}
+#brand-intro.playing .koi-pectoral{animation:koi-fin-beat .7s ease-in-out infinite alternate}
+@keyframes koi-to-mark{0%{opacity:1;transform:scale(1.35)}100%{opacity:0;transform:scale(1)}}
+@keyframes mark-appear{from{opacity:0}to{opacity:1}}
+@keyframes koi-tail-beat{from{transform:rotate(-13deg) scaleY(.86)}to{transform:rotate(13deg) scaleY(1)}}
+@keyframes koi-fin-beat{from{transform:rotate(-10deg) scaleY(.8)}to{transform:rotate(12deg) scaleY(1)}}
+@media(prefers-reduced-motion:reduce){#brand-intro .intro-koi{display:none}#brand-intro .intro-fish-mark{opacity:1}}
+
+.intro-koi .koi-detail{stroke-width:1.8}

@@ -1,0 +1,50 @@
+/* 海洋互動特效（ocean-fx.js）。關閉時 body[data-effects=quiet]。 */
+.fx-layer { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 110; pointer-events: none; }
+
+/* 泡泡游標：跟在原生游標後面漂浮的一顆氣泡 */
+.fx-cursor { position: fixed; left: 0; top: 0; width: 0; height: 0; z-index: 111; pointer-events: none; opacity: 0; transition: opacity .3s; }
+.fx-cursor.visible { opacity: 1; }
+.fx-cursor::before { content: ''; position: absolute; left: -15px; top: -15px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #237d7880; background: radial-gradient(circle at 33% 30%, #ffffffd9 0 7%, transparent 8%), radial-gradient(circle at 50% 50%, transparent 58%, #8cdad024 100%); transition: transform .35s cubic-bezier(.3, 1.5, .5, 1), background-color .3s, border-color .3s; }
+.fx-cursor.on-dark::before { border-color: #d6f8f08c; background-color: transparent; }
+.fx-cursor.hover::before { transform: scale(1.75); background-color: #8cdad01f; }
+.fx-cursor.down::before { transform: scale(.7); }
+.fx-cursor.hover.down::before { transform: scale(1.45); }
+
+/* 首頁水面：WebGL 畫布疊在原圖上，濾鏡與原圖一致 */
+.fx-water { position: absolute; inset: 0; display: block; width: 100%; height: 100%; filter: brightness(.78) saturate(.9); transition: opacity .5s, filter 1.2s ease; }
+.hero-art:not(.fx-water-on) .fx-water { display: none; }
+
+/* 聯絡區魚群 */
+.fx-fish { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; pointer-events: none; }
+body[data-effects=quiet] .fx-fish { display: none; }
+
+/* 圖片卡片：跟著游標的水下光斑 */
+.fx-caustic::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(240px circle at var(--fx-x, 50%) var(--fx-y, 50%), #d8fff547, #8cdad01a 45%, transparent 70%); mix-blend-mode: screen; transition: opacity .45s; }
+.fx-caustic:hover::before { opacity: 1; }
+body[data-effects=quiet] .fx-caustic::before { display: none; }
+
+/* 右下角控制：深藍模式、水中特效 */
+.fx-dock { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 115; display: flex; gap: 8px; }
+.fx-dock button { position: relative; display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px 0 11px; border: 1px solid #8cdad04d; border-radius: 19px; color: #d3eeed; background: #061c2ad1; backdrop-filter: blur(10px); font-size: 10px; letter-spacing: .12em; box-shadow: 0 8px 24px #00131b33; transition: color .25s, border-color .25s, background-color .25s, box-shadow .4s; }
+.fx-dock svg { width: 18px; height: 18px; flex-shrink: 0; }
+.fx-dock button::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--seafoam); box-shadow: 0 0 8px var(--seafoam); transition: background-color .25s, box-shadow .25s; }
+.fx-dock button[aria-pressed=false] { color: #8fa9ad; border-color: #8fa9ad40; }
+.fx-dock button[aria-pressed=false]::after { background: #5f7a80; box-shadow: none; }
+.fx-dock button:hover { border-color: var(--seafoam); color: #fff; }
+.fx-dock button:focus-visible { outline: 2px solid var(--seafoam); outline-offset: 3px; }
+.fx-deep[aria-pressed=true] { color: #c9fbff; border-color: #6ff7ff80; background: #020c14e0; box-shadow: 0 8px 24px #00131b55, 0 0 18px #6ff7ff33; }
+.fx-deep[aria-pressed=true] svg { fill: #6ff7ff33; filter: drop-shadow(0 0 4px #6ff7ffaa); }
+.fx-deep[aria-pressed=true]::after { background: #6ff7ff; box-shadow: 0 0 8px #6ff7ff; }
+
+/* 深藍模式下的泡泡游標帶一點冷光 */
+.deep-sea .fx-cursor::before { border-color: #8ff8ffa6; box-shadow: 0 0 14px #6ff7ff59, inset 0 0 8px #6ff7ff33; background: radial-gradient(circle at 33% 30%, #e8ffffd9 0 7%, transparent 8%); }
+
+@media (max-width: 760px) {
+  .fx-water { filter: brightness(.8) saturate(.9); }
+  .fx-dock button { width: 40px; height: 40px; padding: 0; justify-content: center; gap: 0; }
+  .fx-dock button span { display: none; }
+  .fx-dock button::after { position: absolute; right: 7px; top: 7px; width: 5px; height: 5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-layer, .fx-cursor, .fx-water, .fx-fish { display: none !important; }
+}
