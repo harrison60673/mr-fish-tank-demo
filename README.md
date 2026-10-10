@@ -1,14 +1,15 @@
 # 魚缸先生 Mr. Fish Tank — 設計概念 Demo
 
-魚缸先生水景設計的三個版本概念網站，以 GitHub Pages 部署為靜態網站。
+魚缸先生水草缸、純魚缸、海水缸三種缸型的概念網站，以 GitHub Pages 部署為靜態網站。
 
-| 版本 | 路徑 |
+| 缸型 | 路徑 |
 |---|---|
-| 海洋版（首頁預設） | [`aqua-design-ocean/`](aqua-design-ocean/) |
-| 日式版 | [`aqua-design-jp/`](aqua-design-jp/) |
-| 原始版 | [`aqua-design/`](aqua-design/) |
+| 入口：選擇你的水景（開場動畫＋三缸型選擇） | [`index.html`](index.html) |
+| 水草缸 | [`aqua-design/`](aqua-design/) |
+| 純魚缸（介面預設日文） | [`aqua-design-jp/`](aqua-design-jp/) |
+| 海水缸 | [`aqua-design-ocean/`](aqua-design-ocean/) |
 
-根目錄的 `index.html` 會自動導向海洋版；三個版本可由頁面右上角互相切換。
+根目錄 `index.html` 是入口選擇頁；三個網站可由頁面上方的切換列互相切換。
 
 ## 部署
 
