@@ -48,8 +48,8 @@ html[lang=ja] #brand-intro .jp-intro-name { font-size: clamp(25px, 2.8vw, 32px);
 #brand-intro .jp-intro-tagline { color: #53676e; font: 400 12px/1.9 var(--serif); letter-spacing: .13em; margin-top: 13px; opacity: 1; }
 #brand-intro .jp-intro-signature { display: block; color: #758188; font-size: 7px; line-height: 1.7; letter-spacing: 2px; margin-top: 20px; opacity: 1; }
 #brand-intro .jp-final-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3; width: min(420px, 78vw, 62svh); display: flex; flex-direction: column; align-items: center; text-align: center; visibility: hidden; opacity: 0; }
-/* Display the supplied image in its original red, black and white colors. */
-#brand-intro .jp-final-mark { display: block; width: 100%; height: auto; background: #fff; }
+/* Cut-out logo printed straight onto the paper; multiply keeps it inked into the sheet's texture. */
+#brand-intro .jp-final-mark { display: block; width: 100%; height: auto; mix-blend-mode: multiply; }
 #brand-intro .jp-final-caption { color: #53676e; font: 400 12px/1.9 var(--serif); letter-spacing: .13em; margin-top: 22px; }
 #brand-intro:not(.playing) .jp-final-logo { visibility: visible; opacity: 1; }
 #brand-intro .jp-intro-foot { position: absolute; bottom: 30px; left: 5%; right: 5%; z-index: 3; display: flex; align-items: center; gap: 22px; color: #617177; font-size: 7px; line-height: 1.6; letter-spacing: 1.6px; }
@@ -70,7 +70,7 @@ html[lang=ja] #brand-intro .jp-intro-name { font-size: clamp(25px, 2.8vw, 32px);
 #brand-intro.playing .jp-intro-name { animation: jp-text-appear .8s 2.05s ease-out both; }
 #brand-intro.playing .jp-intro-tagline { animation: jp-text-appear .8s 2.4s ease-out both; }
 #brand-intro.playing .jp-intro-signature { animation: jp-text-appear .7s 2.6s ease-out both; }
-#brand-intro.playing .jp-final-logo { animation: jp-original-logo-appear .7s 3.8s ease-out both; }
+#brand-intro.playing .jp-final-logo { animation: jp-original-logo-appear .9s 3.8s ease-out both; }
 #brand-intro.playing .jp-intro-timeline::after { animation: jp-intro-progress 6s linear both; }
 
 /* The transparent dialog lets the homepage appear between the opening sheets. */
@@ -87,7 +87,7 @@ html[lang=ja] #brand-intro .jp-intro-name { font-size: clamp(25px, 2.8vw, 32px);
 @keyframes jp-seal-appear { from { opacity: 0; transform: scale(.93); } to { opacity: 1; transform: none; } }
 @keyframes jp-text-appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes jp-opening-clear { from { opacity: 1; visibility: visible; } to { opacity: 0; visibility: hidden; } }
-@keyframes jp-original-logo-appear { from { opacity: 0; visibility: hidden; } to { opacity: 1; visibility: visible; } }
+@keyframes jp-original-logo-appear { from { opacity: 0; visibility: hidden; filter: blur(4px); } to { opacity: 1; visibility: visible; filter: none; } }
 @keyframes jp-intro-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes jp-paper-left-exit { to { transform: translateX(-102%); } }
 @keyframes jp-paper-right-exit { to { transform: translateX(102%); } }

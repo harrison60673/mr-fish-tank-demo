@@ -77,13 +77,10 @@
   grid-area: 1 / 1;
   width: min(420px, 80vw, 60svh);
   padding: clamp(12px, 2vw, 20px);
-  background: #fff;
-  border: 1px solid #d9eeeb;
-  box-shadow: 0 18px 70px #00131b55;
   visibility: visible;
   opacity: 1;
 }
-/* Keep the original red, black and white image on a light panel. */
+/* A soft pool of light under the cut-out logo, so it sits in the water instead of on a card. */
 #brand-intro .ocean-intro-final-logo::before {
   content: '';
   position: absolute;
@@ -98,7 +95,8 @@
   width: 100%;
   height: auto;
   aspect-ratio: 1120 / 700;
-  overflow: hidden;
+  overflow: visible;
+  filter: drop-shadow(0 0 18px #9fe3dc40) drop-shadow(0 10px 28px #00131b99);
 }
 #brand-intro .ocean-intro-mark {
   display: block;
