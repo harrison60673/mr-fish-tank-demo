@@ -1,0 +1,1 @@
+window.AquaPhotoConfig = {"version":1,"revision":12,"mappings":{"original":{"hero-1":{"id":"IG-003-07","file":"images/IG-003-07-C7yHSJSS8tO.jpg","width":1440,"height":1800},"hero-2":{"id":"IG-005-05","file":"images/IG-005-05-CuI0XFYSiCH.jpg","width":1440,"height":1080}},"japanese":{},"ocean":{}}};

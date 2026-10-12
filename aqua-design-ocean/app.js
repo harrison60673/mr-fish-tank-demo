@@ -3,6 +3,15 @@
   const t = value => value;
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const setPhoto = (img, slot, fallbackSrc, fallbackAlt) => {
+    img.dataset.photoSlot = slot;
+    if (typeof window.AquaPhotos?.set === 'function') {
+      window.AquaPhotos.set(img, slot, fallbackSrc, fallbackAlt);
+      return;
+    }
+    img.src = fallbackSrc;
+    img.alt = fallbackAlt;
+  };
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   if (!reducedMotion.matches && 'IntersectionObserver' in window) {
     document.body.classList.add('js-motion');
@@ -41,7 +50,7 @@
     $$('.scene-dot').forEach((btn, i) => { btn.classList.toggle('active', i === scene); btn.setAttribute('aria-pressed', String(i === scene)); });
     $('.scene-name').textContent = t(scenes[scene].name);
     $('.hero-index').textContent = `0${scene + 1} — 03`;
-    sceneTimer = setTimeout(() => { img.src = `assets/${scenes[scene].image}.png`; img.alt = t(scenes[scene].alt); img.style.opacity = '1'; }, reducedMotion.matches ? 0 : 250);
+    sceneTimer = setTimeout(() => { setPhoto(img, `hero-${scene + 1}`, `assets/${scenes[scene].image}.png`, t(scenes[scene].alt)); img.style.opacity = '1'; }, reducedMotion.matches ? 0 : 250);
   }
   $$('.scene-dot').forEach(btn => btn.addEventListener('click', () => setScene(Number(btn.dataset.scene))));
   $('.scene-next').addEventListener('click', () => setScene((scene + 1) % scenes.length));
@@ -94,7 +103,7 @@
   });
   $$('.work-card').forEach(card => card.addEventListener('click', () => {
     currentProject = Number(card.dataset.project); const p = projects[currentProject];
-    $('#project-image').src = `assets/${p.image}.png`; $('#project-image').alt = t(p.name);
+    setPhoto($('#project-image'), `work-${currentProject + 1}`, `assets/${p.image}.png`, t(p.name));
     $('#project-title').textContent = t(p.name); $('#project-category').textContent = t(p.category); $('#project-description').textContent = t(p.description);
     $('#project-tags').replaceChildren(...p.tags.map(tag => { const span = document.createElement('span'); span.textContent = t(tag); return span; }));
     showDialog(projectDialog);

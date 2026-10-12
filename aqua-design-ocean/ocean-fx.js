@@ -3,6 +3,7 @@
 // 減少動態偏好時只保留深藍模式的配色，不啟動任何動畫。
 (() => {
   'use strict';
+  if (window.AquaPhotos?.isAdminPreview) return;
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');

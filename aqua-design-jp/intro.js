@@ -1,5 +1,6 @@
 (() => {
   'use strict';
+  if (window.AquaPhotos?.isAdminPreview) return;
   const intro = document.querySelector('#brand-intro');
   const replay = document.querySelector('#intro-replay');
   const skip = document.querySelector('#intro-skip');
